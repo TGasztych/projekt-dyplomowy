@@ -40,6 +40,16 @@ function Users() {
 						<label htmlFor="lastName">Nazwisko </label>
 						<Field id="lastName" name="lastName" placeholder="Kowalski" />
 
+
+
+
+
+						<label htmlFor="email">Nazwisko </label>
+						<Field id="email" name="email" placeholder="mojemail@mail.com" type="email"/>
+
+						<label htmlFor="haslo">Nazwisko </label>
+						<Field id="haslo" name="haslo" placeholder="mojehaslo" type="password" />
+
 						<button type="submit">Dodaj</button>
 					</Form>
 				</Formik>

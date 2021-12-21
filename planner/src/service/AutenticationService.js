@@ -9,9 +9,9 @@ const login = async (command) => {
     console.log(encodedPassword)    //TODO wklejac to w baze zamiast hasła (zahashowane hasło zamiast plain textu)
     const user = await getUserByCredentials(username, encodedPassword);
 
-    if(user) {
-        const accessToken = jwt.sign({ userId: user.id, role: "USER" }, authConfig.accessTokenSecret, { expiresIn: '20m' });
-        const refreshToken = jwt.sign({ userId: user.id, role: "USER" }, authConfig.refreshTokenSecret);
+    if (user) {
+        const accessToken = jwt.sign({userId: user.id, role: "USER"}, authConfig.accessTokenSecret, {expiresIn: '20m'});
+        const refreshToken = jwt.sign({userId: user.id, role: "USER"}, authConfig.refreshTokenSecret);
         return {
             accessToken,
             refreshToken
@@ -19,6 +19,20 @@ const login = async (command) => {
     }
 }
 
+const refresh = async (refreshToken) => {
+    return refreshToken ? await getAccessToken(refreshToken) : (() => {throw new Error("Refresh token not found.")})()
+}
+
+const getAccessToken = async (refreshToken) => new Promise((resolve, reject) => {
+    jwt.verify(refreshToken, authConfig.refreshTokenSecret, (err, tokenPayload) => {
+        if (err) {
+            reject(err);
+        }
+        resolve(tokenPayload);
+    });
+})
+
 module.exports = {
-    login
+    login,
+    refresh
 }

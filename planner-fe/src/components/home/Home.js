@@ -1,7 +1,25 @@
+import AuthService from "../../service/AuthService";	//test
+
+
+function wyloguj(){
+	console.log("logout now")
+	AuthService.logout(AuthService.getCurrentUser())
+	window.location.reload()
+}
 function Home() {
+	let user = toString(AuthService.login.username)
+	//test
+	let userStringified = 0	//test
+	console.log("to jest user")	//test
+	console.log(AuthService.login)	//test
+
+
 	return (
+
 			<>
-				<p>witaj</p>
+				<p>witaj {userStringified}</p>
+				<button onClick={wyloguj}>Wyloguj</button>
+
 			</>
 	);
 }
