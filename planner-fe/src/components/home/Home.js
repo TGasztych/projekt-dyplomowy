@@ -1,5 +1,6 @@
 import AuthService from "../../service/AuthService";	//test
 
+//TODO clean up
 
 function wyloguj(){
 	console.log("logout now")

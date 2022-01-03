@@ -8,8 +8,9 @@ const handleResponse = async (res, shouldReturnValue, performOperation, ...args)
             res.send(result);
         }
     } catch (err) {
+        console.error(err)
         res.status(500);
-        res.send(err);
+        res.send(err.message);
     }
 }
 

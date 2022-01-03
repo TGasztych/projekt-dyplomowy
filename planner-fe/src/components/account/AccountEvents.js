@@ -45,9 +45,7 @@ const tableIcons = {
 
 
 
-//TODO posprzątać
-//const rowIdTest = 1 //zmienna używana do zatwierdzania... albo i nie używana
-
+//TODO clean up
 
 const AccountEventTypes = () => {
 
@@ -101,13 +99,11 @@ const AccountEventTypes = () => {
 
      */
     const confirmEvent = async (values) =>
-        axios.put('/api/account-events', values, values, console.log("hejkers z confirmEvent: values = " + values), console.table(values))
-            .then(res => {try{
+        axios.post('/api/account-events/accept/' + values.id)
+            .then(res => {
                 console.table(values)
-                //resetForm();
                 return setEvents([...events, res.data]);
-            }catch (err){
-        console.log(err)}})
+            })
 
 
 
@@ -236,15 +232,18 @@ const AccountEventTypes = () => {
 
     return (
         <>
-
+            <link
+                rel="stylesheet"
+                href="https://fonts.googleapis.com/icon?family=Material+Icons"
+            />
             <div>
                 <h1>Dodaj zdarzenie</h1>
                 <Formik
                     initialValues={{
-                        value: 0,
                         date: new Date(),
+                        value: 0,
                         description: '',
-                        userId: 0,
+                        isAccepted: false,
                         accountEventTypeId: 0,
                     }}
 
@@ -260,9 +259,8 @@ const AccountEventTypes = () => {
                         <label htmlFor="description">Opis</label>
                         <Field id="description" name="description" placeholder="test"/>
 
-                        <label htmlFor="userId">Użytkownik</label>
-                        <Field name={'userId'} component={SelectField} options={users} valueMap={mapUserValue}
-                               labelMap={mapUserLabel}/>
+                        <label htmlFor="isAccepted">Automatyczna akceptacja</label>
+                        <Field id="isAccepted" name="isAccepted" type="checkbox"/>
 
                         <label htmlFor="accountEventTypeId">Typ zdarzenia</label>
                         <Field name={'accountEventTypeId'} component={SelectField} options={types} valueMap={mapTypeValue}

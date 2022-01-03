@@ -26,11 +26,11 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/JakubDwojak/planner.git"
+    "url": "git+https://github.com/TGasztych/projekt-dyplomowy.git"
   },
   "bugs": {
-    "url": "https://github.com/JakubDwojak/planner/issues"
+    "url": "https://github.com/TGasztych/projekt-dyplomowy/issues"
   },
-  "homepage": "https://github.com/JakubDwojak/planner#readme",
+  "homepage": "https://github.com/TGasztych/projekt-dyplomowy#readme",
   "description": ""
 }

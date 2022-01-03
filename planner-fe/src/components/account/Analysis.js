@@ -48,7 +48,22 @@ const tableIcons = {
 };
 
 
+
+
+
+
+
 const Analysis = () => {
+
+
+
+    const [types, setTypes] = useState([])
+
+    useEffect(() => {
+        axios.get("/api/account-events/types").then((res) => setTypes(res.data))
+    }, [])
+
+
 
     const {eventId} = useParams();
 
@@ -136,12 +151,24 @@ const Analysis = () => {
     )
 
      */
+    //TODO analysis view
 
     return (
         <div>
-            ANALIZY (potem naprawie teraz nie dziala)
-            document.
+            <div>
+                ANALIZY
+            </div>
+
+
+            <ul>
+                {types.map(t => (
+                    <li key={t.id}>
+                        <a href={t.id}>{t.name} {t.isRecurring ? 'Powtarzalny' : ''}</a>
+                    </li>
+                ))}
+            </ul>
         </div>
+
     )
 }
 export default Analysis;

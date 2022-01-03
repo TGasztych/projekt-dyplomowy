@@ -27,10 +27,7 @@ const AccountEventTypes = () => {
 				</ul>
 
 
-				<h1>TEST LINKÓW
 
-					<a href={1}>link do 1</a>
-				</h1>
 
 				<h1>Dodaj typ zdarzenia</h1>
 				<Formik

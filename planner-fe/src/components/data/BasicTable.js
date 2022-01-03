@@ -5,7 +5,9 @@ import MOCK_DATA from "./MOCK_DATA.json"
 import {COLUMNS} from "./columns";
 import {useMemo} from "react";
 
-//https://www.youtube.com/watch?v=hson9BXU9F8
+
+//TODO clean up     (btw.. what was package.json in data folder used for)
+//tutorial:  https://www.youtube.com/watch?v=hson9BXU9F8
 
 export const BasicTable = () => {
     const columns = useMemo(() => COLUMNS, [])

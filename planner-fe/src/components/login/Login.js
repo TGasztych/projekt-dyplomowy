@@ -1,5 +1,5 @@
 import {Formik, Field, Form} from 'formik';
-import {useNavigate} from "react-router-dom";
+import {Link, useNavigate} from "react-router-dom";
 import AuthService from "../../service/AuthService";
 
 function Login() {
@@ -13,6 +13,7 @@ function Login() {
     return (
         <>
             <h1>Zaloguj się</h1>
+            <h3>albo <Link to="/register">Zarejestruj nowe konto</Link></h3>
             <Formik
                 initialValues={{
                     username: '',
@@ -22,10 +23,10 @@ function Login() {
             >
                 <Form>
                     <label htmlFor="username">Login </label>
-                    <Field id="username" name="username" placeholder="staszek2137"/>
+                    <Field id="username" name="username" placeholder="username"/>
 
                     <label htmlFor="password">Hasło </label>
-                    <Field type="password" id="password" name="password" placeholder="*** *****"/>
+                    <Field type="password" id="password" name="password" placeholder="*******"/>
 
                     <button type="submit">Zaloguj</button>
                 </Form>

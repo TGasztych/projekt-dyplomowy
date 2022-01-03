@@ -16,8 +16,9 @@ class AuthService {
     }
 
     refresh() {
+        const refreshToken = this.getCurrentUser().refreshToken;
         return axios
-            .post("/api/auth/refresh", this.getCurrentUser().refreshToken)
+            .post("/api/auth/refresh", { refreshToken })
             .then(response => {
                 if (response.data.accessToken && response.data.refreshToken) {
                     localStorage.setItem("user", JSON.stringify(response.data));

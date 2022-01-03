@@ -6,6 +6,7 @@ const AccountEventType = require('./AccountEventType');
 const AccountEvent = sequelize.define('account_event', {
 	id: {
 		type: DataTypes.INTEGER,
+		autoIncrement: true,
 		primaryKey: true,
 	},
 	date: {
@@ -25,14 +26,6 @@ const AccountEvent = sequelize.define('account_event', {
 		type: DataTypes.BOOLEAN,
 		allowNull: false,
 	},
-	userId: {
-		type: DataTypes.INTEGER,
-		references: {
-			model: 'user',
-			key: 'id'
-		},
-		allowNull: false,
-	},
 	accountEventTypeId: {
 		type: DataTypes.INTEGER,
 		references: {
@@ -43,7 +36,6 @@ const AccountEvent = sequelize.define('account_event', {
 	},
 }, {});
 
-AccountEvent.belongsTo(User)
 AccountEvent.belongsTo(AccountEventType)
 
 module.exports = AccountEvent;

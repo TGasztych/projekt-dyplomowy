@@ -6,37 +6,15 @@ import ApplicationNavbar from '../navbar/ApplicationNavbar';
 import AccountEventTypes from '../account/AccountEventTypes';
 import AccountEvents from '../account/AccountEvents';
 import Analysis from '../account/Analysis';
-//import PrivateRoute from "./PrivateRoute";
 import Login from "../login/Login"
+
+import Register from "../login/Register"
 
 
 import AuthService from "../../service/AuthService";
 
 
 
-import Register from "../login/Register"
-
-/*function App() {
-	return (
-			<div className="App">
-				<BrowserRouter>
-					<ApplicationNavbar/>
-					<Routes>
-						<Route path="login" element={<Login/>}/>
-						<PrivateRoute path="users" element={<Users />} />
-						<PrivateRoute path="account-events/types" element={<AccountEventTypes />} />
-						<PrivateRoute path="account-events" element={<AccountEvents />} />
-
-						<PrivateRoute path="analysis" element={<Analysis />} />
-
-						<PrivateRoute path="account-events/:eventId" element={<Analysis />} />
-						<PrivateRoute path="/" element={<Home />} />
-
-					</Routes>
-				</BrowserRouter>
-			</div>
-	);
-}*/
 
 const PrivateRoute = ({ children }) => AuthService.isLoggedUser() ? children : <Navigate to="/login" />;
 

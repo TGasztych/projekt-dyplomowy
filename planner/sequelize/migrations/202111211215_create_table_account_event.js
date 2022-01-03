@@ -17,17 +17,8 @@ module.exports = {
 					},
 					date: Sequelize.DATE,
 					description: Sequelize.STRING,
+					eventGroupId: Sequelize.STRING,
 					isAccepted: Sequelize.BOOLEAN,
-					userId: {
-						type: Sequelize.INTEGER,
-						foreignKey: true,
-						references: {
-							model: {
-								tableName: 'users',
-							},
-							key: 'id'
-						},
-					},
 					accountEventTypeId: {
 						type: Sequelize.INTEGER,
 						foreignKey: true,
@@ -43,19 +34,6 @@ module.exports = {
 					engine: 'MYISAM',
 					charset: 'utf8',
 				},
-		).then(() => queryInterface.addConstraint(
-				'account_events',
-				{
-					fields: ['userId'],
-					type: 'foreign key',
-					name: 'fk_account_events_user_id',
-					references: {
-						table: 'users',
-						field: 'id',
-					},
-					onDelete: 'cascade',
-					onUpdate: 'cascade',
-				}),
 		).then(() => queryInterface.addConstraint(
 				'account_events',
 				{

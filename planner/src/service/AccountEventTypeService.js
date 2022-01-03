@@ -1,34 +1,38 @@
 const AccountEventTypeService = require('../models/AccountEventType');
+const {getUser} = require("./UserService");
 
-const getAccountEventTypes = async () => {
-	const accountEventTypes = await AccountEventTypeService.findAll();
-	return accountEventTypes.map(type => mapTypes(type));
+const getAccountEventTypes = async (userId) => {
+    const accountEventTypes = await AccountEventTypeService.findAll({where: {userId}});
+    return accountEventTypes.map(type => mapTypes(type));
 };
 
 const getAccountEventType = async (eventTypeId) => {
-	return await AccountEventTypeService.findByPk(eventTypeId);
+    return await AccountEventTypeService.findByPk(eventTypeId);
 };
 
-const createAccountEventType = async (command) => {
-	const type = await AccountEventTypeService.create({
-		name: command.name,
-		isRecurring: command.isRecurring
-	});
-	return mapTypes(type);
+const createAccountEventType = async (command, userId) => {
+    const user = await getUser(userId)
+    const type = await AccountEventTypeService.create({
+        userId: user.id,
+        name: command.name,
+        isRecurring: command.isRecurring
+    });
+    return mapTypes(type);
 };
 
 const mapTypes = (type) => {
-	return {
-		id: type.id,
-		name: type.name,
-		isRecurring: type.isRecurring,
-		createdAt: type.createdAt,
-		updatedAt: type.updatedAt,
-	};
+    return {
+        id: type.id,
+        name: type.name,
+        userId: type.userId,
+        isRecurring: type.isRecurring,
+        createdAt: type.createdAt,
+        updatedAt: type.updatedAt,
+    };
 };
 
 module.exports = {
-	getAccountEventTypes,
-	createAccountEventType,
-	getAccountEventType
+    getAccountEventTypes,
+    createAccountEventType,
+    getAccountEventType
 };

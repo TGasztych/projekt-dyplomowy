@@ -5,12 +5,12 @@ const authConfig = require('../../config').auth
 
 const login = async (command) => {
     const {username, password} = command;
-    const encodedPassword = encode(password)      //czyli to daje w save w create user
-    console.log(encodedPassword)    //TODO wklejac to w baze zamiast hasła (zahashowane hasło zamiast plain textu)
+    const encodedPassword = encode(password)      //używane do create user
+    console.log(encodedPassword)    //zahashowane hasło
     const user = await getUserByCredentials(username, encodedPassword);
 
     if (user) {
-        const accessToken = jwt.sign({userId: user.id, role: "USER"}, authConfig.accessTokenSecret, {expiresIn: '20m'});
+        const accessToken = jwt.sign({userId: user.id, role: "USER"}, authConfig.accessTokenSecret, {expiresIn: '1m'});
         const refreshToken = jwt.sign({userId: user.id, role: "USER"}, authConfig.refreshTokenSecret);
         return {
             accessToken,
@@ -24,11 +24,15 @@ const refresh = async (refreshToken) => {
 }
 
 const getAccessToken = async (refreshToken) => new Promise((resolve, reject) => {
-    jwt.verify(refreshToken, authConfig.refreshTokenSecret, (err, tokenPayload) => {
+    jwt.verify(refreshToken, authConfig.refreshTokenSecret, (err, userData) => {
         if (err) {
             reject(err);
         }
-        resolve(tokenPayload);
+        const accessToken = jwt.sign({userId: userData.userId, role: userData.role}, authConfig.accessTokenSecret, {expiresIn: '1m'});
+        resolve({
+            accessToken,
+            refreshToken
+        });
     });
 })
 

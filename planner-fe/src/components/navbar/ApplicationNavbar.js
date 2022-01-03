@@ -1,5 +1,8 @@
 import {Link} from 'react-router-dom';
 
+//TODO navbar (this navbar is only POC placeholder)
+
+
 function ApplicationNavbar() {
 	return (
 			<nav>

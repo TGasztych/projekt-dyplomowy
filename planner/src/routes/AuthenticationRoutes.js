@@ -9,6 +9,6 @@ router
         await handleResponse(res, true, async (command) => await login(command), req.body)
     })
     .post("/refresh", jsonParser, async (req, res) => {
-        await handleResponse(res, true, async (accessToken) => await refresh(accessToken), req.body)
+        await handleResponse(res, true, async (refreshToken) => await refresh(refreshToken), req.body.refreshToken)
     });
 module.exports = router;

@@ -1,12 +1,13 @@
 import {Formik, Field, Form} from 'formik';
 //import {useHistory} from "react-router-dom";
-import {useNavigate} from "react-router-dom";
+import {Link, useNavigate} from "react-router-dom";
 import AuthService from "../../service/AuthService";
 
 //import createUser from "../../service/UserService";
 import {useEffect, useState} from "react";
 import axios from "axios";
 
+//TODO clean up
 
 function Register() {
     const [users, setUsers] = useState([]);
@@ -28,6 +29,7 @@ function Register() {
                 ))}
             </ul>
             <h1>Dodaj użytkownika</h1>
+            <h3>albo <Link to="/login">Zaloguj się</Link></h3>
             <Formik
                 initialValues={{
                     firstName: '',

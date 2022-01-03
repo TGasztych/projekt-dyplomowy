@@ -22,7 +22,6 @@ const createUser = async (command) => {
         password: encode(command.password)
     });
     return mapUser(user);
-
 }
 
 const mapUser = (user) => {
